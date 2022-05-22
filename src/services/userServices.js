@@ -33,4 +33,30 @@ const loginValidation = async (email, password) => {
   return isLoginOK;
 };
 
-module.exports = { loginValidation };
+// Req 4
+const fieldCreateUserValidation = async (displayName, email, password, image) => {
+  const { error } = Joi.object({
+    displayName: Joi.string().min(8).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
+  }).validate({ displayName, email, password });
+  if (error) {
+    return { status: 400, message: error.message };
+  }
+
+  // check if there is an email
+  const hasEmail = await User.findOne({ where: { email } });
+  if (hasEmail) return { status: 409, message: 'User already registered' };
+
+  const newUser = await User.create({ displayName, email, password, image });
+
+  const token = generateToken(newUser.dataValues);
+
+  return { status: 201, token };
+};
+const createUserValidation = async (displayName, email, password, image) => {
+  const data = fieldCreateUserValidation(displayName, email, password, image);
+  return data;
+};
+
+module.exports = { loginValidation, createUserValidation };
