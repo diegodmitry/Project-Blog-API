@@ -65,4 +65,16 @@ const getAllUsers = async () => {
   return { status: 200, users };
 };
 
-module.exports = { loginValidation, createUserValidation, getAllUsers };
+// Req 6
+const userGetById = async (id) => {
+  const user = await User.findByPk(id);
+  
+  if (!user) return { status: 404, message: 'User does not exist' };
+
+  // remove password key
+  delete user.dataValues.password;
+
+  return { status: 200, user: user.dataValues };
+};
+
+module.exports = { loginValidation, createUserValidation, getAllUsers, userGetById };
