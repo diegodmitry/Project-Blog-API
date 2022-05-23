@@ -26,9 +26,8 @@ module.exports = (sequelize, DataTypes) => {
   // userId é foreingKey dentro de BlogPosts
   // Source: https://sequelize.org/docs/v6/core-concepts/assocs/
   // BlogPost será criada no requesito à frente
-  // Comentei pois estava dando erro na importação do User model para o service
-  // Users.associate = (models) => {
-  //   Users.hasMany(models.BlogPosts, { foreignKey: 'userId' });
-  // };
+  Users.associate = (models) => {
+    Users.hasMany(models.BlogPost, { foreignKey: 'userId' });
+  };
   return Users;
 }; 
