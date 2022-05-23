@@ -28,4 +28,9 @@ const createUser = async (req, res) => {
     console.log(error.message);
   }
 };
-module.exports = { userLogin, createUser };
+
+const getAllUsers = async (_req, res) => {
+  const users = await userServices.getAllUsers();
+  return res.status(users.status).json(users.users);
+};
+module.exports = { userLogin, createUser, getAllUsers };
