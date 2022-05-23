@@ -59,4 +59,10 @@ const createUserValidation = async (displayName, email, password, image) => {
   return data;
 };
 
-module.exports = { loginValidation, createUserValidation };
+// Req 5
+const getAllUsers = async () => {
+  const users = await User.findAll({ attributes: { exclude: ['password'] } });
+  return { status: 200, users };
+};
+
+module.exports = { loginValidation, createUserValidation, getAllUsers };
