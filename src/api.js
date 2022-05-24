@@ -27,6 +27,8 @@ app.get('/post', auth, blogPostController.getAllPosts);
 
 app.get('/post/:id', auth, blogPostController.getById);
 
+app.put('/post/:id', auth, blogPostController.updateBlogPost);
+
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
