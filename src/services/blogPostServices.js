@@ -62,12 +62,17 @@ const getAllPosts = async () => {
 };
 
 // Req 14
-// const getById = async (id) => {
-//   const post = await BlogPost.findByPk(id, { include: [
-//     { model: User, as: 'user', attributes: { exclude: 'password' } },
-//     { model: Category, as: 'categories', through: { attributes: [] } }] });
-//   console.log("🚀 ~ file: blogPostServices.js ~ line 73 ~ getById ~ post", post)
-//   // return post;
-// };
+const getById = async (id) => {
+  const post = await BlogPost.findByPk(id, {
+    include: [
+    {
+      model: User, as: 'user', attributes: { exclude: 'password' },
+    },
+    {
+      model: Category, as: 'categories', through: { attributes: [] },
+    }],
+  });
+  return post;
+};
 
-module.exports = { addBlogPost, getAllPosts };
+module.exports = { addBlogPost, getAllPosts, getById };
