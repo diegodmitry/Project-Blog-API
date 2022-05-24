@@ -19,11 +19,11 @@ const getAllPosts = async (_req, res) => {
 };
 
 // Req 14
-// const getbyId = async (req, res) => {
-//   const { id } = req.params;
-//   const post = await blogPostServices.getById(id);
-//   // if (!post) return res.status(404).json({ message: 'Post does not exist' });
-//   // res.status(200).json(post);
-// };
+const getbyId = async (req, res) => {
+  const { id } = req.params;
+  const post = await blogPostServices.getById(id);
+  if (!post) return res.status(404).json({ message: 'Post does not exist' });
+  res.status(200).json(post);
+};
 
-module.exports = { addBlogPost, getAllPosts };
+module.exports = { addBlogPost, getAllPosts, getbyId };
