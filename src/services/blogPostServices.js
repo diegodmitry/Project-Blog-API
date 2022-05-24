@@ -75,4 +75,23 @@ const getById = async (id) => {
   return post;
 };
 
-module.exports = { addBlogPost, getAllPosts, getById };
+// Req 15
+const updateBlogPost = async (id, userId, body) => {
+  const { title, content } = body;
+
+  if (!title || !content) {
+    return { status: 400, message: 'Some required fields are missing' };
+  }
+
+  const post = await BlogPost.findOne({ where: { id, userId } });
+  if (!post) return { status: 401, message: 'Unauthorized user' };
+
+  await BlogPost.update({ title, content }, { where: { id } });
+
+  const postUpdated = await BlogPost.findByPk(id, { include: [
+    { model: User, as: 'user', attributes: { exclude: 'password' } },
+    { model: Category, as: 'categories', through: { attributes: [] } }] });
+  return postUpdated;
+};
+
+module.exports = { addBlogPost, getAllPosts, getById, updateBlogPost };
