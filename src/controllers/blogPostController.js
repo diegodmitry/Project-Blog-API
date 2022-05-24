@@ -32,10 +32,23 @@ const updateBlogPost = async (req, res) => {
   const userId = req.authUser.id;
 
   const data = await blogPostServices.updateBlogPost(id, userId, req.body);
-  
+
   if (data.status === 400) return res.status(data.status).json({ message: data.message });
   if (data.status === 401) return res.status(data.status).json({ message: data.message });
   return res.status(200).json(data);
 };
 
-module.exports = { addBlogPost, getAllPosts, getById, updateBlogPost };
+// Req 16
+const deleteBlogPost = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.authUser.id;
+
+  const data = await blogPostServices.deleteBlogPost(id, userId);
+
+  if (data.status === 401) return res.status(data.status).json({ message: data.message });
+  if (data.status === 404) return res.status(data.status).json({ message: data.message });
+
+  return res.status(204).json(data);
+};
+
+module.exports = { addBlogPost, getAllPosts, getById, updateBlogPost, deleteBlogPost };
