@@ -94,4 +94,22 @@ const updateBlogPost = async (id, userId, body) => {
   return postUpdated;
 };
 
-module.exports = { addBlogPost, getAllPosts, getById, updateBlogPost };
+// Req 16
+const deleteBlogPost = async (id, userId) => {
+  const blogPost = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  if (!blogPost) return { status: 404, message: 'Post does not exist' };
+  if (userId !== blogPost.user.id) return { status: 401, message: 'Unauthorized user' };
+
+  await BlogPost.destroy({
+    where: { id },
+  });
+  return {};
+};
+
+module.exports = { addBlogPost, getAllPosts, getById, updateBlogPost, deleteBlogPost };
