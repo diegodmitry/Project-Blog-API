@@ -26,4 +26,16 @@ const getById = async (req, res) => {
   res.status(200).json(post);
 };
 
-module.exports = { addBlogPost, getAllPosts, getById };
+// Req 15
+const updateBlogPost = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.authUser.id;
+
+  const data = await blogPostServices.updateBlogPost(id, userId, req.body);
+  
+  if (data.status === 400) return res.status(data.status).json({ message: data.message });
+  if (data.status === 401) return res.status(data.status).json({ message: data.message });
+  return res.status(200).json(data);
+};
+
+module.exports = { addBlogPost, getAllPosts, getById, updateBlogPost };
