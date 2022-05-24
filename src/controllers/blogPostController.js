@@ -8,7 +8,7 @@ const addBlogPost = async (req, res) => {
     return res.status(data.status).json({ message: data.message });
   } catch (error) {
     console.log(error.message);
-    return res.status(400).json({ message: `\"categoryIds\" not found` });
+    return res.status(400).json({ message: '"categoryIds" not found' });
   }
 };
 
