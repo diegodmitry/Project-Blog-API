@@ -25,6 +25,8 @@ app.post('/post', auth, blogPostController.addBlogPost);
 
 app.get('/post', auth, blogPostController.getAllPosts);
 
+app.get('/post/search', auth, blogPostController.postSearch);
+
 app.get('/post/:id', auth, blogPostController.getById);
 
 app.put('/post/:id', auth, blogPostController.updateBlogPost);
