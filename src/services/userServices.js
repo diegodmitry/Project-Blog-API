@@ -77,4 +77,10 @@ const userGetById = async (id) => {
   return { status: 200, user: user.dataValues };
 };
 
-module.exports = { loginValidation, createUserValidation, getAllUsers, userGetById };
+// Req 17
+const deleteMe = async (id) => {
+  await User.destroy({ where: { id } });
+  return 204;
+};
+
+module.exports = { loginValidation, createUserValidation, getAllUsers, userGetById, deleteMe };
