@@ -46,4 +46,13 @@ const userGetById = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = { userLogin, createUser, getAllUsers, userGetById };
+
+const deleteMe = async (req, res) => {
+  const { id } = req.authUser;
+  // console.log("🚀 ~ file: userController.js ~ line 52 ~ deleteUser ~ req", req)
+  const statusNumber = await userServices.deleteMe(id);
+  // console.log("🚀 ~ file: userController.js ~ line 54 ~ deleteMe ~ statusNumber", statusNumber)
+  return res.status(statusNumber).end();
+};
+
+module.exports = { userLogin, createUser, getAllUsers, userGetById, deleteMe };
