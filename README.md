@@ -501,12 +501,6 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 <br />
 </details>
 
-<details>
-  <summary><strong>🗂 Compartilhe seu portfólio!</strong></summary>
-
-  Você sabia que o LinkedIn é a principal rede social profissional e compartilhar o seu aprendizado lá é muito importante para quem deseja construir uma carreira de sucesso? Compartilhe esse projeto no seu LinkedIn, marque o perfil da Trybe (@trybe) e mostre para a sua rede toda a sua evolução.
-</details>
-
 <br />
 
 # Requisitos Obrigatórios
